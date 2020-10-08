@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class Search{
     public static void main(String[] args){
         int arr[] = new int[25];
+        String[] inputStorage = new String[99];
         tableConvertor(arr, args[1]);
-        
+        readTxt(args[0], inputStorage);
+
     }
 
     /**
@@ -32,13 +34,16 @@ public class Search{
         }
     }
 
-    public static void readTxt(String txtName){
+    public static void readTxt(String txtName, String[] inputs){
         try {
             File myFile = new File(txtName);
             Scanner reader = new Scanner(myFile);
+            int i = 0;
+
             while (reader.hasNextLine()) {
-              String data = reader.nextLine();
-              System.out.println(data);
+              inputs[i] = reader.nextLine();
+              System.out.println(inputs[i]);
+              i++;
             }
             reader.close();
           } catch (FileNotFoundException e) {
@@ -46,4 +51,6 @@ public class Search{
             e.printStackTrace();
           }
     }
+
+    
 }
