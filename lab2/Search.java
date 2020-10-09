@@ -5,10 +5,24 @@ import java.util.ArrayList;
 
 public class Search{
     public static void main(String[] args){
-        int arr[] = new int[25];
+        int arr[] = new int[26];
         ArrayList <String> inputStorage = new ArrayList <String> ();
+        
         tableConvertor(arr, args[1]);
         readTxt(args[0], inputStorage, args[1]);
+        for (int i = 0; i < inputStorage.size(); i++){
+            if (args[1].length() == inputStorage.get(i).length()){
+                int arr2[] = new int[26];
+                System.out.println();
+                tableConvertor(arr2, inputStorage.get(i));
+                if (isEqual(arr, arr2)){
+                    System.out.println("Found search string: "+ inputStorage.get(i));
+                    System.out.println("Line number: " + (i + 1));
+                    break;
+                }
+            }
+            if(i == (inputStorage.size() - 1)) System.out.println("String not found");
+        }
 
     }
 
@@ -26,6 +40,7 @@ public class Search{
         //Read every letter of the string to turn to the table format
         for (int i = 0; i < str.length(); i++){
             charNum = str.charAt(i) - 97;
+            System.out.print(charNum + " " + str.charAt(i) + " ");
             arr[charNum]++;
         }
 
@@ -39,23 +54,13 @@ public class Search{
         try {
             File myFile = new File(txtName);
             Scanner reader = new Scanner(myFile);
-            int i = 0;
-            String temp;
+            
 
             while (reader.hasNextLine()) {
 
-              temp = reader.nextLine();
-              if(mainInput.length() == temp.length()){
-               inputs.add(temp);
-              }
+              inputs.add(reader.nextLine());
               
-              
-              i++;
             }
-            for(int n = 0; n < inputs.size(); n++){
-                System.out.print("\n" + inputs.get(n));
-            }
-
             reader.close();
           } catch (FileNotFoundException e) {
             System.out.println("File was not found.");
