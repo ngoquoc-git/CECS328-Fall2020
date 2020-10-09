@@ -1,13 +1,14 @@
 import java.io.File;  
 import java.io.FileNotFoundException;  
 import java.util.Scanner; 
+import java.util.ArrayList;
 
 public class Search{
     public static void main(String[] args){
         int arr[] = new int[25];
-        String[] inputStorage = new String[99];
+        ArrayList <String> inputStorage = new ArrayList <String> ();
         tableConvertor(arr, args[1]);
-        readTxt(args[0], inputStorage);
+        readTxt(args[0], inputStorage, args[1]);
 
     }
 
@@ -34,17 +35,27 @@ public class Search{
         }
     }
 
-    public static void readTxt(String txtName, String[] inputs){
+    public static void readTxt(String txtName, ArrayList<String> inputs, String mainInput){
         try {
             File myFile = new File(txtName);
             Scanner reader = new Scanner(myFile);
             int i = 0;
+            String temp;
 
             while (reader.hasNextLine()) {
-              inputs[i] = reader.nextLine();
-              System.out.println(inputs[i]);
+
+              temp = reader.nextLine();
+              if(mainInput.length() == temp.length()){
+               inputs.add(temp);
+              }
+              
+              
               i++;
             }
+            for(int n = 0; n < inputs.size(); n++){
+                System.out.print("\n" + inputs.get(n));
+            }
+
             reader.close();
           } catch (FileNotFoundException e) {
             System.out.println("File was not found.");
