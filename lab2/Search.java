@@ -9,11 +9,10 @@ public class Search{
         ArrayList <String> inputStorage = new ArrayList <String> ();
         
         tableConvertor(arr, args[1]);
-        readTxt(args[0], inputStorage, args[1]);
+        readTxt(args[0], inputStorage);
         for (int i = 0; i < inputStorage.size(); i++){
             if (args[1].length() == inputStorage.get(i).length()){
                 int arr2[] = new int[26];
-                System.out.println();
                 tableConvertor(arr2, inputStorage.get(i));
                 if (isEqual(arr, arr2)){
                     System.out.println("Found search string: "+ inputStorage.get(i));
@@ -40,26 +39,17 @@ public class Search{
         //Read every letter of the string to turn to the table format
         for (int i = 0; i < str.length(); i++){
             charNum = str.charAt(i) - 97;
-            System.out.print(charNum + " " + str.charAt(i) + " ");
             arr[charNum]++;
-        }
-
-        //Test display - will delete
-        for (int n = 0; n < arr.length; n++){
-            System.out.print(arr[n] + " ");
         }
     }
 
-    public static void readTxt(String txtName, ArrayList<String> inputs, String mainInput){
+    public static void readTxt(String txtName, ArrayList<String> inputs){
         try {
             File myFile = new File(txtName);
             Scanner reader = new Scanner(myFile);
-            
 
             while (reader.hasNextLine()) {
-
               inputs.add(reader.nextLine());
-              
             }
             reader.close();
           } catch (FileNotFoundException e) {
